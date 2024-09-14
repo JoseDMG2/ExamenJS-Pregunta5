@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamenJS1</title>
+</head>
+
+<body>
+    <h1>Foro en Tiempo Real</h1>
+    <h2>Nombre:</h2>
+    <input type="text" id="nombre" required>
+    <br>
+    <h2>Comentario:</h2>
+    <textarea id="comentario" rows="3" cols="80" required></textarea>
+    <br>
+    <br>
+    <button onclick="añadirComentario()">Publicar Comentario</button>
+
+    <div id="comentarios">
+        <h2>Comentarios:</h2>
+    </div>
+
+    <script>
+        // Crear el objeto Comentario
+        class Comentario {
+            constructor(nombre, texto) {
+                this.nombre = nombre;
+                this.texto = texto;
+            }
+
+            // Método para obtener el nombre del texto y del Comentario
+            obtenerTexto() {
+                return `${this.nombre}: ${this.texto}`;
+            }
+        }
+
+        // Arreglo para almacenar los comentarios
+        let comentarios = [];
+
+        // Función para agregar un comentario a la lista
+        function agregarComentario(nombre, texto) {
+            const nuevoComentario = new Comentario(nombre, texto);
+            comentarios.push(nuevoComentario);
+            mostrarComentarios();
+        }
+
+        // Función para que se muestren todos los comentarios
+        function mostrarComentarios() {
+            const comentariosDiv = document.getElementById('comentarios');
+            comentariosDiv.innerHTML = '<h2>Comentarios:</h2>';
+
+            comentarios.forEach(comentario => {
+                const comentarioDiv = document.createElement('div');
+                comentarioDiv.className = 'comentario';
+                comentarioDiv.textContent = comentario.obtenerTexto();
+                comentariosDiv.appendChild(comentarioDiv);
+            });
+        }
+
+        // Función para añadir el comentario en el foro
+        function añadirComentario() {
+            const nombre = document.getElementById('nombre').value;
+            const comentario = document.getElementById('comentario').value;
+            if (nombre && comentario) {
+                agregarComentario(nombre, comentario);
+            }
+        }
+    </script>
+</body>
+<footer>
+    <br><br><br><br><br>
+    <hr>
+    <ul>
+        <li>Jose Daniel Medina García</li>
+    </ul>
+</footer>
+</html>
